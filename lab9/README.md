@@ -21,20 +21,19 @@ Query structured data in your data lake (Cloud Storage), at scale, when you cant
 PySpark Jupyter notebooks that can be scheduled 
 
 **When to use:**<br>
-When you prefer a notebook - 
-(a) to author SQL, Spark, Python etc 
-(b) to query BQ, structured data in your data lake, databases
-(c) to not only query, but also visualize using your favorite Python visualization libraries
-(d) because you also need to share it
-(e) as an IDE
+When you prefer a notebook - <br> 
+(a) to author SQL, Spark, Python etc <br> 
+(b) to query BQ, structured data in your data lake, databases<br> 
+(c) to not only query, but also visualize using your favorite Python visualization libraries<br> 
+(d) because you also need to share it<br> 
+(e) as an IDE<br> 
 
 **Positioning by persona:**<br>
-(a) Data Engineer: Spark IDE, Apache Hive Metastore IDE 
-(b) Data Scientist: Experimentation - preprocessing, model training, tuning, batch scoring
-(c) Data Analyst: Analyze data with a mix of SQL and programmatic logic, at scale
-(d) Data Product Manager: Analyze data & ideate on data products to build, analyze usage and trends with data products
-(e) Data Steward: Analyze data profile, data quality, data access, audit logs and more 
-
+(a) Data Engineer: Spark IDE, Apache Hive Metastore IDE <br> 
+(b) Data Scientist: Experimentation - preprocessing, model training, tuning, batch scoring<br> 
+(c) Data Analyst: Analyze data with a mix of SQL and programmatic logic, at scale<br> 
+(d) Data Product Manager: Analyze data & ideate on data products to build, analyze usage and trends with data products<br> 
+(e) Data Steward: Analyze data profile, data quality, data access, audit logs and more <br> 
 
 
 
