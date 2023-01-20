@@ -38,7 +38,7 @@ When you prefer a notebook - <br>
 
 ## 3. Terminology Levelset
 
-### 3.1. DPMS
+### 3.1. Dataproc Metastore Service
 
 ### 3.2. Environment
 
@@ -46,4 +46,60 @@ When you prefer a notebook - <br>
 
 ### 3.4. Session
 
+## 4. Getting started with DEW - what's involved
 
+
+
+## 5. The lab
+
+### 5.1. IAM permissions
+
+We will use the customer-sa@ service account to create the DPMS and environments. Lets grant the service account, the requisite permissions by running the below in Cloud Shell-
+
+```
+PROJECT_ID=`gcloud config list --format "value(core.project)" 2>/dev/null`
+
+CUSTOMER_UMSA_FQN="customer-sa@${PROJECT_ID}.iam.gserviceaccount.com"
+
+gcloud projects add-iam-policy-binding $PROJECT_ID --member=serviceAccount:$CUSTOMER_UMSA_FQN \
+--role="roles/metastore.admin"
+
+gcloud projects add-iam-policy-binding $PROJECT_ID --member=serviceAccount:$CUSTOMER_UMSA_FQN \
+--role="roles/metastore.metadataEditor"
+
+gcloud projects add-iam-policy-binding $PROJECT_ID --member=serviceAccount:$CUSTOMER_UMSA_FQN \
+--role="roles/metastore.metadataUser"
+```
+
+### 5.2. Create a Dataproc Metastore Service
+
+a) In Cloud Shell scoped to your project, create a DPMS, by running the command below-
+```
+PROJECT_ID=`gcloud config list --format "value(core.project)" 2>/dev/null`
+PROJECT_NBR=`gcloud projects describe $PROJECT_ID | grep projectNumber | cut -d':' -f2 |  tr -d "'" | xargs`
+DPMS_NM="dpms-${PROJECT_NBR}"
+LOCATION="us-central1"
+
+gcloud metastore services create $DPMS_NM \
+  --location=$LOCATION \
+  --impersonate-service-account=$CUSTOMER_UMSA_FQN
+```
+
+b) Enable the gRPC endpoint of the metastore
+```
+curl -X PATCH \
+-H "Authorization: Bearer $(gcloud auth print-access-token)" \
+-H "Content-Type: application/json" \
+"https://metastore.googleapis.com/v1beta/projects/$PROJECT_ID/locations/$LOCATION/services/$DPMS_NM?updateMask=hiveMetastoreConfig.endpointProtocol" \
+-d '{"hiveMetastoreConfig": {"endpointProtocol": "GRPC"}}'
+```
+
+### 5.3. Create an Environment
+
+### 5.4. Analyze data in DEW SQL workbench
+
+
+### 5.5. Analyze data from a DEW Notebook
+
+
+<hr>
